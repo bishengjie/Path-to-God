@@ -1,12 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     // 是否向左移动，反之向右
     private bool isMoveLeft;
+    // 是否正在跳跃
+    private bool isJump;
     private Vector3 nextPlatformLeft, nextPlatformRight;
     private ManagerVars _vars;
 
@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isJump == false)
         {
+            isJump = true;
             Vector3 mousePos = Input.mousePosition;
             // 点击的是左边屏幕
             if (mousePos.x <= Screen.width / 2)
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour
             {
                 isMoveLeft = false;
             }
+
+            Jump();
         }
     }
 
@@ -37,21 +40,29 @@ public class PlayerController : MonoBehaviour
         if (isMoveLeft)
         {
             transform.localScale = new Vector3(-1, 1, 1);
+            transform.DOMoveX(nextPlatformLeft.x, 0.2f);
+            transform.DOMoveY(nextPlatformLeft.y + 0.8f, 0.15f);
         }
         else
         {
+            transform.DOMoveX(nextPlatformRight.x, 0.2f);
+            transform.DOMoveY(nextPlatformRight.y + 0.8f, 0.15f);
             transform.localScale = Vector3.one;
+
         }
-            
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag=="Platform")
+        if (col.tag == "Platform")
         {
+            isJump = false;
             Vector3 currentPlatformPos = col.gameObject.transform.position;
-            nextPlatformLeft = new Vector3(currentPlatformPos.x - _vars.nextXPos, currentPlatformPos.y + _vars.nextYPos, 0);
-            nextPlatformRight = new Vector3(currentPlatformPos.x + _vars.nextXPos, currentPlatformPos.y + _vars.nextYPos, 0);
+            nextPlatformLeft = new Vector3(currentPlatformPos.x - _vars.nextXPos, currentPlatformPos.y + _vars.nextYPos,
+                0);
+            nextPlatformRight = new Vector3(currentPlatformPos.x + _vars.nextXPos,
+                currentPlatformPos.y + _vars.nextYPos, 0);
         }
     }
 }
