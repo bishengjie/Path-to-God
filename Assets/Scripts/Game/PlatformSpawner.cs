@@ -13,7 +13,17 @@ public class PlatformSpawner : MonoBehaviour
     private ManagerVars _vars;
     private Vector3 platformSpawnPosition; // 平台的生成位置
     private bool isLeftSpawn; // 是否朝左边生成，反之朝右
-    
+
+    private void Awake()
+    {
+        EventCenter.AddListener(EventDefine.DecidePath,DecidePath);
+    }
+
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.DecidePath,DecidePath);
+    }
+
     private void Start()
     {
         platformSpawnPosition = startSpawnPos; // 第一个平台的生成位置

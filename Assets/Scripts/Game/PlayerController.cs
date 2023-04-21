@@ -17,8 +17,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsGameStart == false || GameManager.Instance.IsGameOver)
+            return;
         if (Input.GetMouseButtonDown(0) && isJump == false)
         {
+            EventCenter.Broadcast(EventDefine.DecidePath);
             isJump = true;
             Vector3 mousePos = Input.mousePosition;
             // 点击的是左边屏幕

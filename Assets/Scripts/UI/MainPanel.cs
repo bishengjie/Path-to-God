@@ -32,6 +32,7 @@ public class MainPanel : MonoBehaviour
     // 开始按钮点击后调用此方法
     private void OnStartButtonClick()
     {
+        GameManager.Instance.IsGameStart = true;
                   // 广播，播放
         EventCenter.Broadcast(EventDefine.ShowGamePanel);
         gameObject.SetActive(false); // 隐藏自身
