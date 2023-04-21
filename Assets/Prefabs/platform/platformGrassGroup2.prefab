@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 7846134596350434498}
   - component: {fileID: 5904189342866541484}
   - component: {fileID: 1693155686810644288}
+  - component: {fileID: 625661835207457614}
   m_Layer: 0
   m_Name: platformGrassGroup2
   m_TagString: Platform
@@ -277,3 +278,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &625661835207457614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474631501995942160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261d40b6e4e9f084fa741101a32d6fe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderers:
+  - {fileID: 1960284272761999110}

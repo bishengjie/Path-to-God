@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 6745245760505722154}
   - component: {fileID: 6960058672979173956}
   - component: {fileID: 2740353168696018600}
+  - component: {fileID: -519662191609434662}
   m_Layer: 0
   m_Name: platformCommonGroup1
   m_TagString: Platform
@@ -277,3 +278,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-519662191609434662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252057517293062392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261d40b6e4e9f084fa741101a32d6fe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderers:
+  - {fileID: 3047996559241930478}

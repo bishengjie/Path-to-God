@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 6289574260102690436}
   - component: {fileID: 7657803010868224490}
   - component: {fileID: 3230580182817785094}
+  - component: {fileID: -9114489931569689536}
   m_Layer: 0
   m_Name: platformWinterGroup3
   m_TagString: Platform
@@ -277,3 +278,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-9114489931569689536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6634125579038427990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261d40b6e4e9f084fa741101a32d6fe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderers:
+  - {fileID: 2350399102791001408}
