@@ -12,7 +12,8 @@ public class PlatformSpawner : MonoBehaviour
     private int spawnPlatformCount;
     private ManagerVars _vars;
     private Vector3 platformSpawnPosition; // 平台的生成位置
-    private bool isLeftSpawn = false;
+    private bool isLeftSpawn; // 是否朝左边生成，反之朝右
+    
     private void Start()
     {
         platformSpawnPosition = startSpawnPos; // 第一个平台的生成位置
@@ -22,6 +23,9 @@ public class PlatformSpawner : MonoBehaviour
             spawnPlatformCount = 5;
             DecidePath();
         }
+        // 生成人物
+        GameObject go = Instantiate(_vars.characterPrefab);
+        go.transform.position = new Vector3(0,-1.8f,0);
     }
 
     // 确定路径
@@ -34,6 +38,7 @@ public class PlatformSpawner : MonoBehaviour
         }
         else
         {
+            // 反转生成方向
             isLeftSpawn = !isLeftSpawn; // 转向 左变右 右变左
             spawnPlatformCount = Random.Range(1, 4);
             SpawnPlatform();
@@ -44,8 +49,7 @@ public class PlatformSpawner : MonoBehaviour
     // 生成平台
     private void SpawnPlatform()
     {
-        GameObject go = Instantiate(_vars.normalPlatform, transform);
-        go.transform.position = platformSpawnPosition;
+        SpawnNormalPlatform();
         if (isLeftSpawn) // 向左生成
         {
             platformSpawnPosition = new Vector3(platformSpawnPosition.x - _vars.nextXPos,
@@ -56,5 +60,12 @@ public class PlatformSpawner : MonoBehaviour
             platformSpawnPosition = new Vector3(platformSpawnPosition.x + _vars.nextXPos,
                 platformSpawnPosition.y + _vars.nextYPos, 0);
         }
+    }
+
+    // 生成普通平台（单个）
+    private void SpawnNormalPlatform()
+    {
+        GameObject go = Instantiate(_vars.normalPlatformPrefab);
+        go.transform.position = platformSpawnPosition;
     }
 }
