@@ -10,4 +10,6 @@ public class ManagerVars : ScriptableObject
         return Resources.Load<ManagerVars>("ManagerVarsContainer");
     }
     public List<Sprite> bgThemeSpriteList = new();
+    public GameObject normalPlatform;
+    public float nextXPos = 0.554f, nextYPos = 0.645f;
 }
