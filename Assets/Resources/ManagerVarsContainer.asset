@@ -24,5 +24,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 20da7e56cbb26b3498b25fb61fa9a7ff, type: 3}
   characterPrefab: {fileID: 8481485711499677435, guid: c946e85507ee2f945b21d1a7149316ad, type: 3}
   normalPlatformPrefab: {fileID: 3749804890528821916, guid: 6c53b04f3d7b69e4b8b8aec047473d6c, type: 3}
+  commonPlatformGroup:
+  - {fileID: 6252057517293062392, guid: 822e25b027505e8499327e3da6ac4b51, type: 3}
+  - {fileID: 6502272215702301508, guid: 3f37d06ba42a7fe4680d8ce788ae339b, type: 3}
+  - {fileID: 2119710642077073364, guid: 16ab0cbe60d2c704f82d9db0bdcfbb29, type: 3}
+  - {fileID: 5436454513532396179, guid: 8f1eb9e42dae7754397bf2967d853597, type: 3}
+  grassPlatformGroup:
+  - {fileID: 942393990333099962, guid: 580bf591411f88744aac69f3ef7b734a, type: 3}
+  - {fileID: 7474631501995942160, guid: ad781a26090c89442ba709896a6031e7, type: 3}
+  winterPlatformGroup:
+  - {fileID: 5144507249542535183, guid: cb1e8667494f6a64dac099ef26842d9e, type: 3}
+  - {fileID: 231385418962052649, guid: a8d9cbeff1ce33a46adb03882ed856a5, type: 3}
+  - {fileID: 6634125579038427990, guid: aba6642ba78b0a744885d2402f754cea, type: 3}
   nextXPos: 0.554
   nextYPos: 0.645
