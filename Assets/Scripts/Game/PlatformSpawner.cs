@@ -22,6 +22,13 @@ public class PlatformSpawner : MonoBehaviour
     private Sprite selectPlatformSprite; //选择的平台图
     // 组合平台的类型
     private PlatformGroupType _groupType;
+    // 钉子平台是否生成在左边
+    private bool spikeSpawnLeft = false;
+    // 钉子方向平台的位置
+    private Vector3 spikeDirectionPlatformPos;
+    // 生成钉子平台之后需要在钉子方向生成的平台数量
+    private int afterSpawnSpikeCount;
+    private bool isSpawnSpike;
     
     private void Awake()
     {
@@ -68,6 +75,11 @@ public class PlatformSpawner : MonoBehaviour
     // 确定路径
     private void DecidePath()
     {
+        if (isSpawnSpike)
+        {
+            AfterSpawnSpike();
+            return;
+        }
         if (spawnPlatformCount > 0)
         {
             spawnPlatformCount--;
@@ -127,6 +139,18 @@ public class PlatformSpawner : MonoBehaviour
                     value = 1; // 生成左边方向的钉子
                 }
                 SpawnSpikePlatform(value);
+
+                isSpawnSpike = true;
+                afterSpawnSpikeCount = 4;
+                if (spikeSpawnLeft) // 钉子在左边
+                {
+                    spikeDirectionPlatformPos = new Vector3(platformSpawnPosition.x - 1.65f,
+                        platformSpawnPosition.y + _vars.nextYPos, 0);
+                }
+                else
+                { spikeDirectionPlatformPos = new Vector3(platformSpawnPosition.x + 1.65f,
+                    platformSpawnPosition.y + _vars.nextYPos, 0);
+                }
             }
         }
 
@@ -181,13 +205,34 @@ public class PlatformSpawner : MonoBehaviour
         GameObject temp = null;
         if (direction == 0)
         {
+            spikeSpawnLeft = false;
             temp = Instantiate(_vars.spikePlatformRight, transform);
         }
         else
         {
+            spikeSpawnLeft = true;
             temp = Instantiate(_vars.spikePlatformLeft, transform);
         }
         temp.transform.position = platformSpawnPosition;
         temp.GetComponent<PlatformScript>().Init(selectPlatformSprite,direction);
+    }
+
+    // 生成钉子平台之后需要生成的平台
+    // 包括钉子方向，也包括原来的方向
+    private void AfterSpawnSpike()
+    {
+        if (afterSpawnSpikeCount>0)
+        {
+            afterSpawnSpikeCount--;
+            for (int i = 0; i < 2; i++)
+            {
+                
+            }
+        }
+        else
+        {
+            isSpawnSpike = false;
+            DecidePath();
+        }
     }
 }
