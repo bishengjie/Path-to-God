@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderers:
   - {fileID: 5749419225755831900}
+  - {fileID: 5290882393336294963}
 --- !u!1 &7315713772094848646
 GameObject:
   m_ObjectHideFlags: 0

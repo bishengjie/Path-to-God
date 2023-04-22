@@ -116,7 +116,16 @@ public class PlatformSpawner : MonoBehaviour
             // 生成钉子组合平台
             else
             {
-                
+                int value = -1;
+                if (isLeftSpawn)
+                {
+                    value = 0; // 生成右边方向的钉子
+                }
+                else
+                {
+                    value = 1; // 生成左边方向的钉子
+                }
+                SpawnSpikePlatform(value);
             }
         }
 
@@ -164,5 +173,20 @@ public class PlatformSpawner : MonoBehaviour
         GameObject go = Instantiate(_vars.winterPlatformGroup[ran],transform);
         go.transform.position = platformSpawnPosition;
         go.GetComponent<PlatformScript>().Init(selectPlatformSprite);
+    }
+    // 生成钉子组合平台
+    private void SpawnSpikePlatform(int direction)
+    {
+        GameObject temp = null;
+        if (direction == 0)
+        {
+            temp = Instantiate(_vars.spikePlatformRight, transform);
+        }
+        else
+        {
+            temp = Instantiate(_vars.spikePlatformLeft, transform);
+        }
+        temp.transform.position = platformSpawnPosition;
+        temp.GetComponent<PlatformScript>().Init(selectPlatformSprite);
     }
 }

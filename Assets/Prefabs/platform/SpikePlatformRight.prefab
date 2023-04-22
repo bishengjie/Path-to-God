@@ -398,3 +398,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderers:
   - {fileID: 2463953304374184715}
+  - {fileID: 2636663698924006244}
