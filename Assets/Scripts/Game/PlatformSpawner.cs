@@ -179,36 +179,38 @@ public class PlatformSpawner : MonoBehaviour
     // 生成普通平台（单个）
     private void SpawnNormalPlatform(int ranObstacleDirection)
     {
-        GameObject go = Instantiate(_vars.normalPlatformPrefab, transform);
+        GameObject go = ObjectPool.Instance.GetNormalPlatform();
         go.transform.position = platformSpawnPosition;
         go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDirection);
+        go.SetActive(true);
     }
 
     // 生成通用组合平台
     private void SpawnCommOnPlatformGroup(int ranObstacleDirection)
     {
-        int ran = Random.Range(0, _vars.commonPlatformGroup.Count);
-        GameObject go = Instantiate(_vars.commonPlatformGroup[ran], transform);
+
+        GameObject go = ObjectPool.Instance.GetCommonPlatform();
         go.transform.position = platformSpawnPosition;
         go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDirection);
+        go.SetActive(true);
     }
 
     // 生成草地组合平台
     private void SpawnGrassPlatformGroup(int ranObstacleDirection)
     {
-        int ran = Random.Range(0, _vars.grassPlatformGroup.Count);
-        GameObject go = Instantiate(_vars.grassPlatformGroup[ran], transform);
+        GameObject go = ObjectPool.Instance.GetGrassPlatform();
         go.transform.position = platformSpawnPosition;
         go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDirection);
+        go.SetActive(true);
     }
 
     // 生成冬季组合平台
     private void SpawnWinterPlatformGroup(int ranObstacleDirection)
     {
-        int ran = Random.Range(0, _vars.winterPlatformGroup.Count);
-        GameObject go = Instantiate(_vars.winterPlatformGroup[ran], transform);
+        GameObject go = ObjectPool.Instance.GetWinterPlatform();
         go.transform.position = platformSpawnPosition;
         go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDirection);
+        go.SetActive(true);
     }
 
     // 生成钉子组合平台
@@ -218,16 +220,17 @@ public class PlatformSpawner : MonoBehaviour
         if (direction == 0)
         {
             spikeSpawnLeft = false;
-            temp = Instantiate(_vars.spikePlatformRight, transform);
+            temp = ObjectPool.Instance.GetRightSpikePlatform();
         }
         else
         {
             spikeSpawnLeft = true;
-            temp = Instantiate(_vars.spikePlatformLeft, transform);
+            temp = ObjectPool.Instance.GetLeftSpikePlatform();
         }
 
         temp.transform.position = platformSpawnPosition;
         temp.GetComponent<PlatformScript>().Init(selectPlatformSprite, direction);
+        temp.SetActive(true);
     }
 
     // 生成钉子平台之后需要生成的平台
@@ -239,7 +242,7 @@ public class PlatformSpawner : MonoBehaviour
             afterSpawnSpikeCount--;
             for (int i = 0; i < 2; i++)
             {
-                GameObject temp = Instantiate(_vars.normalPlatformPrefab, transform);
+                GameObject temp = ObjectPool.Instance.GetNormalPlatform();
                 if (i == 0) // 生成原来方向的平台
                 {
                     temp.transform.position = platformSpawnPosition;
@@ -271,6 +274,7 @@ public class PlatformSpawner : MonoBehaviour
                 }
 
                 temp.GetComponent<PlatformScript>().Init(selectPlatformSprite, 1);
+                temp.SetActive(true);
             }
         }
         else
