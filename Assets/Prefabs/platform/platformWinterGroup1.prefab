@@ -292,3 +292,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderers:
   - {fileID: 4317715647842596377}
+  obstacle: {fileID: 75539170545087992}

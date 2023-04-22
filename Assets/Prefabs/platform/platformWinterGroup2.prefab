@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderers:
   - {fileID: 9203499769993496639}
+  obstacle: {fileID: 4998612679391185886}
 --- !u!1 &4998612679391185886
 GameObject:
   m_ObjectHideFlags: 0
