@@ -18,8 +18,7 @@ public class PlatformScript : MonoBehaviour
         {
             if (obstacle != null)
             {
-                obstacle.transform.position = new Vector3(-obstacle.transform.position.x, obstacle.transform.position.y,
-                    obstacle.transform.position.z);
+                obstacle.transform.localPosition = new Vector3(-obstacle.transform.localPosition.x, obstacle.transform.localPosition.y, 0);
 
             }
         }
