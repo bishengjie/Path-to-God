@@ -15,6 +15,7 @@ public class GamePanel : MonoBehaviour
     {
         // 监听
         EventCenter.AddListener(EventDefine.ShowGamePanel,Show);
+        EventCenter.AddListener<int>(EventDefine.UpdateScoreText,UpdateScoreText);
         Init();
     }
     private void Init()
@@ -36,11 +37,18 @@ public class GamePanel : MonoBehaviour
     {
         // 移除
         EventCenter.RemoveListener(EventDefine.ShowGamePanel,Show);
+        EventCenter.RemoveListener<int>(EventDefine.UpdateScoreText,UpdateScoreText);
     }
 
     private void Show()
     {
         gameObject.SetActive(true);
+    }
+    
+    // 更新成绩显示
+    private void UpdateScoreText(int score)
+    {
+        _score.text = score.ToString();
     }
     
     // 暂停按钮点击

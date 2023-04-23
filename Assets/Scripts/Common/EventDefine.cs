@@ -2,5 +2,6 @@
 {
     ShowGamePanel,
     DecidePath,
-
+    AddScore,
+    UpdateScoreText,
 }

@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private GameObject lastHitGo = null;
     // 是否检测到平台s
     private bool IsRayPlatform()
     {
@@ -79,12 +80,25 @@ public class PlayerController : MonoBehaviour
         if (hit.collider != null)
         {
             if (hit.collider.tag == "Platform")
+            {
+                if (lastHitGo != hit.collider.gameObject)
+                {
+                    if (lastHitGo == null)
+                    {
+                        lastHitGo = hit.collider.gameObject;
+                        return true;
+                    }
+                    EventCenter.Broadcast(EventDefine.AddScore);
+                    lastHitGo = hit.collider.gameObject;
+                }
+
                 return true;
+            }
         }
 
         return false;
     }
-    
+
     // 是否检测到障碍物
     private bool IsRayObstacle()
     {

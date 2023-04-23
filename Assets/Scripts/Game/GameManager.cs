@@ -13,8 +13,26 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver { get; set; }
     public bool IsPause { get; set; }
 
+    // 游戏成绩
+    private int _gameScore;
+    
     private void Awake()
     {
         Instance = this;
+        EventCenter.AddListener(EventDefine.AddScore,AddGameScore);
+    }
+
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.AddScore,AddGameScore);
+    }
+
+    // 增加游戏成绩
+    private void AddGameScore()
+    {
+        if(IsGameStart==false||IsGameOver||IsPause)return;
+        
+        _gameScore++;
+        EventCenter.Broadcast(EventDefine.UpdateScoreText,_gameScore);
     }
 }
