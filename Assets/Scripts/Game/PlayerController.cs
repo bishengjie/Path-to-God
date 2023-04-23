@@ -1,4 +1,4 @@
-using System;
+using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine;
 
@@ -27,7 +27,11 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(rayDown.position, Vector2.down * 1,Color.red);
         Debug.DrawRay(rayLeft.position, Vector2.left * 0.15f,Color.cyan);
         Debug.DrawRay(rayRight.position, Vector2.right * 0.15f,Color.green);
-        if (GameManager.Instance.IsGameStart == false || GameManager.Instance.IsGameOver)
+        // 判断是否点击在UI上 是人物不在移动
+        if (EventSystem.current.IsPointerOverGameObject())return;
+       
+        if (GameManager.Instance.IsGameStart == false || GameManager.Instance.IsGameOver
+            ||GameManager.Instance.IsPause)
             return;
         if (Input.GetMouseButtonDown(0) && isJump == false)
         {
@@ -56,17 +60,19 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.IsGameOver = true;
             // 调用结束面板
         }
-
         // 正在跳跃并且检测到障碍物且游戏没有over
         if (isJump && IsRayObstacle() && GameManager.Instance.IsGameOver == false)
         {
+            GameObject go = ObjectPool.Instance.GetDeathEffect();
+            go.SetActive(true);
+            go.transform.position = transform.position;
             GameManager.Instance.IsGameOver = true;
             // 销毁人物
             Destroy(gameObject);
         }
     }
 
-    // 是否检测到平台
+    // 是否检测到平台s
     private bool IsRayPlatform()
     {
         RaycastHit2D hit = Physics2D.Raycast(rayDown.position, Vector2.down, 1f, platformLayer);

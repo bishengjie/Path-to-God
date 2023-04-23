@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameStart { get; set; }
     // 游戏是否结束
     public bool IsGameOver { get; set; }
+    public bool IsPause { get; set; }
 
     private void Awake()
     {

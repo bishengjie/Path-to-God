@@ -49,7 +49,8 @@ public class GamePanel : MonoBehaviour
         _buttonPlay.gameObject.SetActive(true);
         _buttonPause.gameObject.SetActive(false);
         // 游戏暂停
-        
+        Time.timeScale = 0;
+        GameManager.Instance.IsPause = true;
     }
     // 开始按钮点击
     private void OnPlayButtonClick()
@@ -57,7 +58,8 @@ public class GamePanel : MonoBehaviour
         _buttonPlay.gameObject.SetActive(false);
         _buttonPause.gameObject.SetActive(true);
         // 游戏继续
-
+        Time.timeScale = 1;
+        GameManager.Instance.IsPause = false;
     }
 
 }
