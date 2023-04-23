@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -26,7 +23,7 @@ public class PlatformSpawner : MonoBehaviour
     private PlatformGroupType _groupType;
 
     // 钉子平台组合是否生成在左边
-    private bool spikeSpawnLeft = false;
+    private bool spikeSpawnLeft;
 
     // 钉子方向平台的位置
     private Vector3 spikeDirectionPlatformPos;
