@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +11,16 @@ public class MainPanel : MonoBehaviour
     private void Awake()
     {
         Init();
+        
+    }
+
+    private void Start()
+    {
+        if (GameDate.IsAgainGame)
+        {
+            EventCenter.Broadcast(EventDefine.ShowGamePanel);
+            gameObject.SetActive(false);
+        }
     }
 
     private void Init()

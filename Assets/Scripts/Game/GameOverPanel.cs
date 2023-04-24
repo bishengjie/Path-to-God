@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOverPanel : MonoBehaviour
 {
@@ -12,8 +10,8 @@ public class GameOverPanel : MonoBehaviour
     private void Awake()
     {
         reStart.onClick.AddListener(OnReStartButtonClick);
-        reStart.onClick.AddListener(OnRankButtonClick);
-        reStart.onClick.AddListener(OnHomeButtonClick);
+        rank.onClick.AddListener(OnRankButtonClick);
+        home.onClick.AddListener(OnHomeButtonClick);
         EventCenter.AddListener(EventDefine.ShowGameOverPanel, Show);
         gameObject.SetActive(false);
     }
@@ -34,7 +32,8 @@ public class GameOverPanel : MonoBehaviour
     // 再来一局按钮
     private void OnReStartButtonClick()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameDate.IsAgainGame = true;
     }
     // 排行榜按钮点击
     private void OnRankButtonClick()
@@ -44,6 +43,7 @@ public class GameOverPanel : MonoBehaviour
     // 主界面按钮点击
     private void OnHomeButtonClick()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameDate.IsAgainGame = false;
     }
 }

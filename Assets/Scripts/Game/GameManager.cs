@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -25,6 +22,10 @@ public class GameManager : MonoBehaviour
         EventCenter.AddListener(EventDefine.AddScore,AddGameScore);
         EventCenter.AddListener(EventDefine.PlayerMove,PlayerMove);
         EventCenter.AddListener(EventDefine.AddDiamond,AddGameDiamond);
+        if (GameDate.IsAgainGame)
+        {
+            IsGameStart = true;
+        }
     }
 
     private void OnDestroy()
