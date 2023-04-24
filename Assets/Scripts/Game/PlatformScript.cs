@@ -52,6 +52,11 @@ public class PlatformScript : MonoBehaviour
                 }
             }
         }
+
+        if (transform.position.y - Camera.main.transform.position.y < -6)
+        {
+            StartCoroutine(DealyHide());
+        }
     }
 
     private IEnumerator DealyHide() //Hide隐藏 
