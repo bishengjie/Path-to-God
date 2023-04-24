@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Obstacle
+  - Pickup
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
     locked: 0
   - name: platform
     uniqueID: 2673138439
+    locked: 0
+  - name: Pickup
+    uniqueID: 4137011541
     locked: 0
   - name: Player
     uniqueID: 3021805097

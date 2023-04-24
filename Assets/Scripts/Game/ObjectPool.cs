@@ -13,6 +13,7 @@ public class ObjectPool : MonoBehaviour
     private List<GameObject> _spikePlatformLeftList = new();
     private List<GameObject> _spikePlatformRightList = new();
     private List<GameObject> _deathEffectList = new();
+    private List<GameObject> _diamondList = new();
     private ManagerVars _vars;
 
     private void Awake()
@@ -65,6 +66,10 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < _initSpawnCount; i++)
         {
             InstantiateObject(_vars.deathEffect, ref _deathEffectList);
+        } 
+        for (int i = 0; i < _initSpawnCount; i++)
+        {
+            InstantiateObject(_vars.diamondPrefab, ref _diamondList);
         }
     }
 
@@ -176,6 +181,20 @@ public class ObjectPool : MonoBehaviour
         }
 
         return InstantiateObject(_vars.deathEffect, ref _deathEffectList);
+
+    } 
+    // 获取钻石
+    public GameObject GetDiamond()
+    {
+        for (int i = 0; i < _diamondList.Count; i++)
+        {
+            if (_diamondList[i].activeInHierarchy == false)
+            {
+                return _diamondList[i];
+            }
+        }
+
+        return InstantiateObject(_vars.diamondPrefab, ref _diamondList);
 
     } 
 }

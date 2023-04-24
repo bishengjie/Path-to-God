@@ -21,5 +21,6 @@ public class ManagerVars : ScriptableObject
     public GameObject spikePlatformLeft;
     public GameObject spikePlatformRight;
     public GameObject deathEffect;
+    public GameObject diamondPrefab;
     public float nextXPos = 0.554f, nextYPos = 0.645f;
 }

@@ -39,5 +39,6 @@ MonoBehaviour:
   spikePlatformLeft: {fileID: 3694473167823200330, guid: 51058e8397828504f9875662d39dbfbb, type: 3}
   spikePlatformRight: {fileID: 6827129305969304861, guid: a71e9567bf1b0f340a0397e91ef0776d, type: 3}
   deathEffect: {fileID: 4746687767505998508, guid: 9a02126a1e4dccd45ae4834b1b4bc656, type: 3}
+  diamondPrefab: {fileID: 6519973094576758824, guid: 608e48d4523c95940b8c6cf246eae77d, type: 3}
   nextXPos: 0.554
   nextYPos: 0.645
