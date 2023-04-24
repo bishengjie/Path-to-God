@@ -22,7 +22,13 @@ MonoBehaviour:
   - {fileID: 21300012, guid: 20da7e56cbb26b3498b25fb61fa9a7ff, type: 3}
   - {fileID: 21300004, guid: 20da7e56cbb26b3498b25fb61fa9a7ff, type: 3}
   - {fileID: 21300000, guid: 20da7e56cbb26b3498b25fb61fa9a7ff, type: 3}
+  skinSpriteList:
+  - {fileID: 21300000, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300004, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300008, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
+  - {fileID: 21300012, guid: 0c7b4faa2ba890e45a9bcb89c3349cde, type: 3}
   characterPrefab: {fileID: 8481485711499677435, guid: c946e85507ee2f945b21d1a7149316ad, type: 3}
+  skinChooseItemPrefab: {fileID: 348899125611253285, guid: f6787ef8220dc2c429aed095d912ae1e, type: 3}
   normalPlatformPrefab: {fileID: 3749804890528821916, guid: 6c53b04f3d7b69e4b8b8aec047473d6c, type: 3}
   commonPlatformGroup:
   - {fileID: 6252057517293062392, guid: 822e25b027505e8499327e3da6ac4b51, type: 3}

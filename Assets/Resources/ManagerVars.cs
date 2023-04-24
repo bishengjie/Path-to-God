@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +10,10 @@ public class ManagerVars : ScriptableObject
     }
     public List<Sprite> bgThemeSpriteList = new();
     public List<Sprite> platformThemeSpriteList = new();
+    public List<Sprite> skinSpriteList = new();
     
     public GameObject characterPrefab;
+    public GameObject skinChooseItemPrefab;
     
     public GameObject normalPlatformPrefab;
     public List<GameObject> commonPlatformGroup = new();
