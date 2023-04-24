@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private ManagerVars _vars;
     private Rigidbody2D _myBody;
     private SpriteRenderer _spriteRenderer;
+    private bool _isMove;
+
     private void Awake()
     {
         _vars = ManagerVars.GetManagerVars();
@@ -35,6 +37,11 @@ public class PlayerController : MonoBehaviour
             return;
         if (Input.GetMouseButtonDown(0) && isJump == false)
         {
+            if (_isMove==false)
+            {
+                EventCenter.Broadcast(EventDefine.PlayerMove);
+                _isMove = true;
+            }
             EventCenter.Broadcast(EventDefine.DecidePath);
             isJump = true;
             Vector3 mousePos = Input.mousePosition;
@@ -60,7 +67,7 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.IsGameOver = true;
             // 调用结束面板
         }
-        // 正在跳跃并且检测到障碍物且游戏没有over
+        // 正在跳跃并且检测到障碍物且游戏判定over
         if (isJump && IsRayObstacle() && GameManager.Instance.IsGameOver == false)
         {
             GameObject go = ObjectPool.Instance.GetDeathEffect();

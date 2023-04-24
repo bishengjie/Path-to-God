@@ -4,4 +4,5 @@
     DecidePath,
     AddScore,
     UpdateScoreText,
+    PlayerMove,
 }

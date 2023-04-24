@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +12,12 @@ public enum PlatformGroupType
 public class PlatformSpawner : MonoBehaviour
 {
     public Vector3 startSpawnPos; // 默认初始生成位置
-
+    // 里程碑数
+    public int milestoneCount = 10;
+    // 掉落时间
+    public float fallTime;
+    public float minFallTime;
+    public float multiple; // 倍数
     // 生成平台数量
     private int spawnPlatformCount;
     private ManagerVars _vars;
@@ -60,6 +67,27 @@ public class PlatformSpawner : MonoBehaviour
         go.transform.position = new Vector3(0, -1.8f, 0);
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.IsGameStart && GameManager.Instance.IsGameOver == false)
+        {
+            UpdateFallTime();
+        }
+    }
+
+    // 更新平台掉落时间
+    private void UpdateFallTime()
+    {
+        if (GameManager.Instance.GetGameScore() > milestoneCount)
+        {
+            milestoneCount *= 2;
+            fallTime *= multiple;
+            if (fallTime < minFallTime)
+            {
+                fallTime = minFallTime;
+            }
+        }
+    }
     // 随机平台主题
     private void RandomPlatformTheme()
     {
@@ -178,7 +206,7 @@ public class PlatformSpawner : MonoBehaviour
     {
         GameObject go = ObjectPool.Instance.GetNormalPlatform();
         go.transform.position = platformSpawnPosition;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDirection);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime,ranObstacleDirection);
         go.SetActive(true);
     }
 
@@ -188,7 +216,7 @@ public class PlatformSpawner : MonoBehaviour
 
         GameObject go = ObjectPool.Instance.GetCommonPlatform();
         go.transform.position = platformSpawnPosition;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDirection);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, ranObstacleDirection);
         go.SetActive(true);
     }
 
@@ -197,7 +225,7 @@ public class PlatformSpawner : MonoBehaviour
     {
         GameObject go = ObjectPool.Instance.GetGrassPlatform();
         go.transform.position = platformSpawnPosition;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDirection);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, ranObstacleDirection);
         go.SetActive(true);
     }
 
@@ -206,7 +234,7 @@ public class PlatformSpawner : MonoBehaviour
     {
         GameObject go = ObjectPool.Instance.GetWinterPlatform();
         go.transform.position = platformSpawnPosition;
-        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, ranObstacleDirection);
+        go.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, ranObstacleDirection);
         go.SetActive(true);
     }
 
@@ -226,7 +254,7 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         temp.transform.position = platformSpawnPosition;
-        temp.GetComponent<PlatformScript>().Init(selectPlatformSprite, direction);
+        temp.GetComponent<PlatformScript>().Init(selectPlatformSprite,  fallTime,direction);
         temp.SetActive(true);
     }
 
@@ -270,7 +298,7 @@ public class PlatformSpawner : MonoBehaviour
                     }
                 }
 
-                temp.GetComponent<PlatformScript>().Init(selectPlatformSprite, 1);
+                temp.GetComponent<PlatformScript>().Init(selectPlatformSprite, fallTime, 1);
                 temp.SetActive(true);
             }
         }
