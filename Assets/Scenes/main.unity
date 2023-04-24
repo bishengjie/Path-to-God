@@ -7103,6 +7103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 966782308}
+  - component: {fileID: 966782309}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -7137,6 +7138,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &966782309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966782307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f0a1ea5def54f488c431717d9cc28d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 286307497}
+  bestScore: {fileID: 549031293}
+  addDiamond: {fileID: 791926128}
+  reStart: {fileID: 494692959}
+  rank: {fileID: 1021290097}
+  home: {fileID: 263698767}
 --- !u!1 &1021290095
 GameObject:
   m_ObjectHideFlags: 0

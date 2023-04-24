@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine;
@@ -67,28 +68,35 @@ public class PlayerController : MonoBehaviour
             _spriteRenderer.sortingLayerName = "Default";
             GetComponent<BoxCollider2D>().enabled = false;
             GameManager.Instance.IsGameOver = true;
-            print("游戏结束了IsRayPlatform");
-            // 调用结束面板
+            // 协程
+            StartCoroutine(DealyShowGameOverPanel());
         }
 
         // 正在跳跃并且检测到障碍物且游戏判定over
         if (isJump && IsRayObstacle() && GameManager.Instance.IsGameOver == false)
         {
-            print("游戏结束了IsRayObstacle");
             GameObject go = ObjectPool.Instance.GetDeathEffect();
             go.SetActive(true);
             go.transform.position = transform.position;
             GameManager.Instance.IsGameOver = true;
             // 销毁人物
-            Destroy(gameObject);
+            _spriteRenderer.enabled = false;
+            // 协程
+            StartCoroutine(DealyShowGameOverPanel());
         }
 
         if (transform.position.y - Camera.main.transform.position.y < -6 && GameManager.Instance.IsGameOver == false)
         {
             GameManager.Instance.IsGameOver = true;
-            gameObject.SetActive(false);
-            print("游戏结束了");
+            StartCoroutine(DealyShowGameOverPanel());
         }
+    }
+
+    IEnumerator DealyShowGameOverPanel()
+    {
+        yield return new WaitForSeconds(1f);
+        // 调用结束面板
+        EventCenter.Broadcast(EventDefine.ShowGameOverPanel);
     }
 
     private GameObject lastHitGo = null;

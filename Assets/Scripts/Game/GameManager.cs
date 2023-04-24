@@ -59,4 +59,9 @@ public class GameManager : MonoBehaviour
         _gameDiamond++;
         EventCenter.Broadcast(EventDefine.UpdateDiamondText,_gameDiamond);
     }
+    // 获得吃到的钻石数
+    public int  GetGameDiamond()
+    {
+        return _gameDiamond;
+    }
 }
