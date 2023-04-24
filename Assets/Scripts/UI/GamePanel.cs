@@ -16,6 +16,7 @@ public class GamePanel : MonoBehaviour
         // 监听
         EventCenter.AddListener(EventDefine.ShowGamePanel,Show);
         EventCenter.AddListener<int>(EventDefine.UpdateScoreText,UpdateScoreText);
+        EventCenter.AddListener<int>(EventDefine.UpdateDiamondText,UpdateDiamondText);
         Init();
     }
     private void Init()
@@ -38,6 +39,7 @@ public class GamePanel : MonoBehaviour
         // 移除
         EventCenter.RemoveListener(EventDefine.ShowGamePanel,Show);
         EventCenter.RemoveListener<int>(EventDefine.UpdateScoreText,UpdateScoreText);
+        EventCenter.RemoveListener<int>(EventDefine.UpdateDiamondText,UpdateDiamondText);
     }
 
     private void Show()
@@ -49,6 +51,11 @@ public class GamePanel : MonoBehaviour
     private void UpdateScoreText(int score)
     {
         _score.text = score.ToString();
+    }  
+    // 更新钻石数量显示
+    private void UpdateDiamondText(int diamond)
+    {
+        _diamondCount.text = diamond.ToString();
     }
     
     // 暂停按钮点击

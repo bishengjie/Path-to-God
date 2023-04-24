@@ -1,3 +1,4 @@
+using System;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine;
@@ -168,6 +169,17 @@ public class PlayerController : MonoBehaviour
                 0);
             nextPlatformRight = new Vector3(currentPlatformPos.x + _vars.nextXPos,
                 currentPlatformPos.y + _vars.nextYPos, 0);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.collider.tag == "Pickup")
+        {
+            EventCenter.Broadcast(EventDefine.AddDiamond);
+            // 吃到钻石
+            col.gameObject.SetActive(false);
+            
         }
     }
 }

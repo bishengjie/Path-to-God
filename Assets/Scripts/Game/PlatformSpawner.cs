@@ -189,8 +189,8 @@ public class PlatformSpawner : MonoBehaviour
             }
         }
 
-        int ranSpawnDiamond = Random.Range(0, 10);
-        if (ranSpawnDiamond==6&&GameManager.Instance.PlayerIsMove)
+        int ranSpawnDiamond = Random.Range(0, 8);
+        if (ranSpawnDiamond >= 6 && GameManager.Instance.PlayerIsMove)
         {
             GameObject go = ObjectPool.Instance.GetDiamond();
             go.transform.position = new Vector3(platformSpawnPosition.x, platformSpawnPosition.y + 0.5f, 0);

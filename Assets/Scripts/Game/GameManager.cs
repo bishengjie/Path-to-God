@@ -17,18 +17,21 @@ public class GameManager : MonoBehaviour
 
     // 游戏成绩
     private int _gameScore;
+    private int _gameDiamond;
     
     private void Awake()
     {
         Instance = this;
         EventCenter.AddListener(EventDefine.AddScore,AddGameScore);
         EventCenter.AddListener(EventDefine.PlayerMove,PlayerMove);
+        EventCenter.AddListener(EventDefine.AddDiamond,AddGameDiamond);
     }
 
     private void OnDestroy()
     {
         EventCenter.RemoveListener(EventDefine.AddScore,AddGameScore);
         EventCenter.RemoveListener(EventDefine.PlayerMove,PlayerMove);
+        EventCenter.RemoveListener(EventDefine.AddDiamond,AddGameDiamond);
     }
 
     // 玩家移动会调用到此方法
@@ -49,5 +52,11 @@ public class GameManager : MonoBehaviour
     public int  GetGameScore()
     {
         return _gameScore;
+    } 
+    // 更新游戏钻石数量
+    private void  AddGameDiamond()
+    {
+        _gameDiamond++;
+        EventCenter.Broadcast(EventDefine.UpdateDiamondText,_gameDiamond);
     }
 }
