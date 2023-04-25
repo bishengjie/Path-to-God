@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.IsGameStart == false || GameManager.Instance.IsGameOver
                                                       || GameManager.Instance.IsPause)
             return;
-        if (Input.GetMouseButtonDown(0) && isJump == false)
+        if (Input.GetMouseButtonDown(0) && isJump == false && nextPlatformLeft != Vector3.zero)
         {
             if (_isMove == false)
             {
