@@ -11,12 +11,37 @@ public class ShopPanel : MonoBehaviour
 
     private ManagerVars _vars;
     private Transform _parent;
+    private Text _name;
+    private Button _back;
 
     private void Awake()
     {
+        EventCenter.AddListener(EventDefine.ShowShopPanel,Show);
         _parent = transform.Find("ScrollRect/Parent");
+        _name = transform.Find("Name").GetComponent<Text>();
+        _back = transform.Find("Back").GetComponent<Button>();
+        _back.onClick.AddListener(OnBackButtonClick);
         _vars = ManagerVars.GetManagerVars();
         Init();
+        gameObject.SetActive(false);
+    }
+
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
+    
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.ShowShopPanel,Show);
+        
+    }
+    
+    private void OnBackButtonClick()
+    {
+        EventCenter.Broadcast(EventDefine.ShowMainPanel);
+        gameObject.SetActive(false);
+        
     }
 
     private void Init()
@@ -34,14 +59,15 @@ public class ShopPanel : MonoBehaviour
     private void Update()
     {
         //                          四舍五入
-        int currentIndex = (int)Mathf.Round(_parent.transform.localPosition.x / -160.0f);
+        int selectIndex = (int)Mathf.Round(_parent.transform.localPosition.x / -160.0f);
         if (Input.GetMouseButtonDown(0))
         {
-            _parent.transform.DOLocalMoveX(currentIndex * -160, 0.2f);
+            _parent.transform.DOLocalMoveX(selectIndex * -160, 0.2f);
             //_parent.transform.localPosition = new Vector3(currentIndex * -160, 0);
         }
-        SetItemSize(currentIndex);
-        print(currentIndex);
+        SetItemSize(selectIndex);
+        RefreshUI(selectIndex);
+        print(selectIndex);
     }
 
     private void SetItemSize(int index)
@@ -57,5 +83,10 @@ public class ShopPanel : MonoBehaviour
                 _parent.GetChild(i).GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(80, 80);
             }
         }
+    }
+
+    private void RefreshUI(int selectIndex) // 刷新 
+    {
+        _name.text = _vars.skinNameList[selectIndex];
     }
 }

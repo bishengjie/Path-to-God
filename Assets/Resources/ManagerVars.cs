@@ -14,7 +14,7 @@ public class ManagerVars : ScriptableObject
     
     public GameObject characterPrefab;
     public GameObject skinChooseItemPrefab;
-    
+    public List<string> skinNameList = new();
     public GameObject normalPlatformPrefab;
     public List<GameObject> commonPlatformGroup = new();
     public List<GameObject> grassPlatformGroup = new();

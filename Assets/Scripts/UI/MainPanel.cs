@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +11,22 @@ public class MainPanel : MonoBehaviour
 
     private void Awake()
     {
+        EventCenter.AddListener(EventDefine.ShowMainPanel,Show);
         Init();
         
     }
 
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener(EventDefine.ShowMainPanel,Show);
+        
+    }
+
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
+    
     private void Start()
     {
         if (GameDate.IsAgainGame)
@@ -48,6 +61,8 @@ public class MainPanel : MonoBehaviour
     // 商店按钮点击
    private void OnShopButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.ShowShopPanel);
+        gameObject.SetActive(false);
         
     }
     
