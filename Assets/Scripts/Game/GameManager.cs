@@ -81,6 +81,17 @@ public class GameManager : MonoBehaviour
     {
         return _gameDiamond;
     }
+
+    // 获取当前皮肤是否解锁
+    public bool GetSkinUnlocked(int index)
+    {
+        return _skinUnlocked[index];
+    } 
+    // 设置当前皮肤解锁
+    public void SetSkinUnlocked(int index)
+    {
+        _skinUnlocked[index] = true;
+    }
     
     // 初始化游戏数据
     private void InitGameData()
@@ -101,8 +112,9 @@ public class GameManager : MonoBehaviour
             _bestScoreArr = new int[3];
             _selectSkin = 0;
             _skinUnlocked = new bool[_vars.skinSpriteList.Count];
-            _skinUnlocked[1] = true;
+            _skinUnlocked[0] = true;
             _diamondCount = 10;
+            _date = new GameDate();
             Save();
 
         }
