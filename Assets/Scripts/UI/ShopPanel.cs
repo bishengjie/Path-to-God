@@ -27,6 +27,7 @@ public class ShopPanel : MonoBehaviour
         _back = transform.Find("Back").GetComponent<Button>();
         _back.onClick.AddListener(OnBackButtonClick);
         _select = transform.Find("Select").GetComponent<Button>();
+        _select.onClick.AddListener(OnSelectButtonClick);
         _buy = transform.Find("Buy").GetComponent<Button>();
         _buy.onClick.AddListener(OnBuyButtonClick);
         _vars = ManagerVars.GetManagerVars();
@@ -70,6 +71,15 @@ public class ShopPanel : MonoBehaviour
         GameManager.Instance.UpdateAllDiamond(-price);
         GameManager.Instance.SetSkinUnlocked(_selectIndex);
         _parent.GetChild(_selectIndex).GetChild(0).GetComponent<Image>().color=Color.white;
+    }
+    
+    // 选择按钮点击
+    private void OnSelectButtonClick()
+    {
+        EventCenter.Broadcast(EventDefine.ChangeSkin, _selectIndex);
+        GameManager.Instance.SetSelectSkin(_selectIndex);
+        EventCenter.Broadcast(EventDefine.ShowMainPanel);
+        gameObject.SetActive(false);
     }
 
     private void Init()

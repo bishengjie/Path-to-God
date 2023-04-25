@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine.EventSystems;
 using DG.Tweening;
@@ -20,9 +21,27 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        EventCenter.AddListener<int>(EventDefine.ChangeSkin,ChangeSkin);
         _vars = ManagerVars.GetManagerVars();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _myBody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        ChangeSkin(GameManager.Instance.GetCurrentSelectSkin());
+    }
+
+    private void OnDestroy()
+    {
+        EventCenter.RemoveListener<int>(EventDefine.ChangeSkin,ChangeSkin);
+        
+    }
+    
+    // 更换皮肤的调用
+    private void ChangeSkin(int skinIndex)
+    {
+        _spriteRenderer.sprite = _vars.characterSkinSpriteList[skinIndex];
     }
 
     private void Update()

@@ -106,6 +106,19 @@ public class GameManager : MonoBehaviour
         _diamondCount += value;
         Save();
     }
+
+    // 设置当前选择的皮肤下标
+    public void SetSelectSkin(int index)
+    {
+        _selectSkin = index;
+        Save();
+    }
+
+    // 获得当前选择的皮肤
+    public int GetCurrentSelectSkin()
+    {
+        return _selectSkin;
+    }
     
     // 初始化游戏数据
     private void InitGameData()
@@ -122,6 +135,7 @@ public class GameManager : MonoBehaviour
         // 如果第一次开始游戏
         if (_isFirstGame)
         {
+            _isFirstGame = false;
             _isMusicOn = true;
             _bestScoreArr = new int[3];
             _selectSkin = 0;
