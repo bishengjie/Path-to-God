@@ -12,19 +12,23 @@ public class ShopPanel : MonoBehaviour
     private ManagerVars _vars;
     private Transform _parent;
     private Text _name;
+    private Text _diamond;
     private Button _back;
     private Button _select;
     private Button _buy;
+    private int _selectIndex;
 
     private void Awake()
     {
         EventCenter.AddListener(EventDefine.ShowShopPanel,Show);
         _parent = transform.Find("ScrollRect/Parent");
         _name = transform.Find("Name").GetComponent<Text>();
+        _diamond = transform.Find("Diamond/diamond").GetComponent<Text>();
         _back = transform.Find("Back").GetComponent<Button>();
         _back.onClick.AddListener(OnBackButtonClick);
         _select = transform.Find("Select").GetComponent<Button>();
         _buy = transform.Find("Buy").GetComponent<Button>();
+        _buy.onClick.AddListener(OnBuyButtonClick);
         _vars = ManagerVars.GetManagerVars();
        
     }
@@ -46,11 +50,26 @@ public class ShopPanel : MonoBehaviour
         
     }
     
+    // 返回按钮点击
     private void OnBackButtonClick()
     {
         EventCenter.Broadcast(EventDefine.ShowMainPanel);
         gameObject.SetActive(false);
         
+    }
+    
+    // 购买按钮点击
+    private void OnBuyButtonClick()
+    {
+        int price = int.Parse(_buy.GetComponentInChildren<Text>().text);
+        if (price > GameManager.Instance.GetAllDiamond())
+        {
+            Debug.Log("钻石不足，不能购买");
+            return;
+        }
+        GameManager.Instance.UpdateAllDiamond(-price);
+        GameManager.Instance.SetSkinUnlocked(_selectIndex);
+        _parent.GetChild(_selectIndex).GetChild(0).GetComponent<Image>().color=Color.white;
     }
 
     private void Init()
@@ -79,14 +98,14 @@ public class ShopPanel : MonoBehaviour
     private void Update()
     {
         //                          四舍五入
-        int selectIndex = (int)Mathf.Round(_parent.transform.localPosition.x / -160.0f);
+         _selectIndex = (int)Mathf.Round(_parent.transform.localPosition.x / -160.0f);
         if (Input.GetMouseButtonDown(0))
         {
-            _parent.transform.DOLocalMoveX(selectIndex * -160, 0.2f);
+            _parent.transform.DOLocalMoveX(_selectIndex * -160, 0.2f);
             //_parent.transform.localPosition = new Vector3(currentIndex * -160, 0);
         }
-        SetItemSize(selectIndex);
-        RefreshUI(selectIndex);  
+        SetItemSize(_selectIndex);
+        RefreshUI(_selectIndex);  
     }
 
     private void SetItemSize(int index)
@@ -107,10 +126,13 @@ public class ShopPanel : MonoBehaviour
     private void RefreshUI(int selectIndex) // 刷新 
     {
         _name.text = _vars.skinNameList[selectIndex];
+        _diamond.text = GameManager.Instance.GetAllDiamond().ToString();
+        // 未解锁
         if (GameManager.Instance.GetSkinUnlocked(selectIndex)==false)
         {
             _select.gameObject.SetActive(false);
             _buy.gameObject.SetActive(true);
+            _buy.GetComponentInChildren<Text>().text = _vars.skinPriceList[selectIndex].ToString();
         }
         else
         {

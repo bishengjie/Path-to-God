@@ -34,6 +34,7 @@ MonoBehaviour:
   - "\u5FCD\u8005"
   - "\u970D\u6BD4\u7279\u4EBA"
   - "\u5C0F\u50F5\u5C38"
+  skinPriceList: 01000000020000000300000014000000
   normalPlatformPrefab: {fileID: 3749804890528821916, guid: 6c53b04f3d7b69e4b8b8aec047473d6c, type: 3}
   commonPlatformGroup:
   - {fileID: 6252057517293062392, guid: 822e25b027505e8499327e3da6ac4b51, type: 3}

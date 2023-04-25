@@ -8332,7 +8332,7 @@ GameObject:
   - component: {fileID: 1649101800}
   - component: {fileID: 1649101799}
   m_Layer: 5
-  m_Name: DiamondCount
+  m_Name: diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8412,7 +8412,7 @@ GameObject:
   - component: {fileID: 1683521719}
   - component: {fileID: 1683521718}
   m_Layer: 5
-  m_Name: diamond
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

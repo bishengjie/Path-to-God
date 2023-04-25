@@ -91,6 +91,20 @@ public class GameManager : MonoBehaviour
     public void SetSkinUnlocked(int index)
     {
         _skinUnlocked[index] = true;
+        Save();
+    }
+
+    // 获取所有的钻石数量
+    public int GetAllDiamond()
+    {
+        return _diamondCount;
+    }
+    
+    // 更新所有的钻石数量
+    public void UpdateAllDiamond(int value)
+    {
+        _diamondCount += value;
+        Save();
     }
     
     // 初始化游戏数据
