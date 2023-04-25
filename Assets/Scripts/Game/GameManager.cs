@@ -1,8 +1,12 @@
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    private GameDate _date;
     
     // 游戏是否开始
     public bool IsGameStart { get; set; }
@@ -16,9 +20,18 @@ public class GameManager : MonoBehaviour
     private int _gameScore;
     private int _gameDiamond;
     
+    private bool _isFirstGame;
+    private bool _isMusicOn;
+    private int[] _bestScoreArr;
+    private int _selectSkin;
+    private bool[] _skinUnlocked;
+    private int _diamondCount;
+    
+    
     private void Awake()
     {
         Instance = this;
+        _date = new GameDate();
         EventCenter.AddListener(EventDefine.AddScore,AddGameScore);
         EventCenter.AddListener(EventDefine.PlayerMove,PlayerMove);
         EventCenter.AddListener(EventDefine.AddDiamond,AddGameDiamond);
@@ -64,5 +77,45 @@ public class GameManager : MonoBehaviour
     public int  GetGameDiamond()
     {
         return _gameDiamond;
+    }
+
+    // 储存数据
+    private void Save()
+    {
+        try
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            using (FileStream fileStream = File.Create(Application.persistentDataPath + "/GameData.data"))
+            {
+                _date.SetBestScoreArr(_bestScoreArr);
+                _date.SetDiamondCount(_diamondCount);
+                _date.SetIsFirstGame(_isFirstGame);
+                _date.SetIsMusicOn(_isMusicOn);
+                _date.SetSelectSkin(_selectSkin);
+                _date.SetSkinUnlocked(_skinUnlocked);
+                binaryFormatter.Serialize(fileStream, _date);
+            }
+        }
+        catch (Exception e)
+        {
+            print(e.Message);
+        }
+    }
+
+    // 读取
+    private void Read()
+    {
+        try
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            using (FileStream fileStream = File.Open(Application.persistentDataPath + "/GameData.data",FileMode.Open))
+            {
+                _date = (GameDate)binaryFormatter.Deserialize(fileStream);
+            }
+        }
+        catch (Exception e)
+        {
+            print(e.Message);
+        }
     }
 }
