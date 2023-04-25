@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     private GameDate _date;
+    private ManagerVars _vars;
+    
     
     // 游戏是否开始
     public bool IsGameStart { get; set; }
@@ -30,8 +32,8 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        _vars = ManagerVars.GetManagerVars();
         Instance = this;
-        _date = new GameDate();
         EventCenter.AddListener(EventDefine.AddScore,AddGameScore);
         EventCenter.AddListener(EventDefine.PlayerMove,PlayerMove);
         EventCenter.AddListener(EventDefine.AddDiamond,AddGameDiamond);
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         {
             IsGameStart = true;
         }
+        InitGameData();
     }
 
     private void OnDestroy()
@@ -77,6 +80,40 @@ public class GameManager : MonoBehaviour
     public int  GetGameDiamond()
     {
         return _gameDiamond;
+    }
+    
+    // 初始化游戏数据
+    private void InitGameData()
+    {
+        Read();
+        if (_date != null)
+        {
+            _isFirstGame = _date.GetIsFirstGame();
+        }
+        else
+        {
+            _isFirstGame = true;
+        }
+        // 如果第一次开始游戏
+        if (_isFirstGame)
+        {
+            _isMusicOn = true;
+            _bestScoreArr = new int[3];
+            _selectSkin = 0;
+            _skinUnlocked = new bool[_vars.skinSpriteList.Count];
+            _skinUnlocked[1] = true;
+            _diamondCount = 10;
+            Save();
+
+        }
+        else
+        {
+            _isMusicOn = _date.GetIsMusicOn();
+            _bestScoreArr = _date.GetBestScoreArr();
+            _selectSkin = _date.GetSelectSkin();
+            _skinUnlocked = _date.GetSkinUnlocked();
+            _diamondCount = _date.GetDiamondCount();
+        }
     }
 
     // 储存数据
