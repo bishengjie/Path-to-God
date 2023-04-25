@@ -8,10 +8,13 @@ public class MainPanel : MonoBehaviour
     private Button _buttonShop;
     private Button _buttonRank;
     private Button _buttonSound;
+    private ManagerVars _vars;
 
     private void Awake()
     {
+        _vars = ManagerVars.GetManagerVars();
         EventCenter.AddListener(EventDefine.ShowMainPanel,Show);
+        EventCenter.AddListener<int>(EventDefine.ChangeSkin,ChangeSkin);
         Init();
         
     }
@@ -19,9 +22,18 @@ public class MainPanel : MonoBehaviour
     private void OnDestroy()
     {
         EventCenter.RemoveListener(EventDefine.ShowMainPanel,Show);
+        EventCenter.RemoveListener<int>(EventDefine.ChangeSkin,ChangeSkin);
         
     }
 
+    // 皮肤更换，这里更换UI皮肤图片
+    private void ChangeSkin(int skinIndex)
+    {
+        
+        _buttonShop.transform.GetChild(0).GetComponent<Image>().sprite =
+            _vars.skinSpriteList[skinIndex];
+
+    }
     private void Show()
     {
         gameObject.SetActive(true);
@@ -34,6 +46,8 @@ public class MainPanel : MonoBehaviour
             EventCenter.Broadcast(EventDefine.ShowGamePanel);
             gameObject.SetActive(false);
         }
+
+        ChangeSkin(GameManager.Instance.GetCurrentSelectSkin());
     }
 
     private void Init()

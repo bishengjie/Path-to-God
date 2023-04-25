@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -103,6 +99,8 @@ public class ShopPanel : MonoBehaviour
             go.GetComponentInChildren<Image>().sprite = _vars.skinSpriteList[i];
             go.transform.localPosition = new Vector3((i + 1) * 160, 0, 0);
         }
+         // 打开界面直接定位到选中的皮肤
+        _parent.transform.localPosition = new Vector3(GameManager.Instance.GetCurrentSelectSkin() * -160, 0);
     }
 
     private void Update()
