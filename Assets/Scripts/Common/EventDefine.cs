@@ -11,5 +11,6 @@
     ShowShopPanel,
     ShowMainPanel,
     ChangeSkin,
+    Hint,
     
 }

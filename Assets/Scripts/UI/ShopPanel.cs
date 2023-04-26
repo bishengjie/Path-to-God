@@ -61,6 +61,8 @@ public class ShopPanel : MonoBehaviour
         int price = int.Parse(_buy.GetComponentInChildren<Text>().text);
         if (price > GameManager.Instance.GetAllDiamond())
         {
+            EventCenter.Broadcast<string>(EventDefine.Hint,"钻石不足");
+        
             Debug.Log("钻石不足，不能购买");
             return;
         }
