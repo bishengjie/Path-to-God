@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class MainPanel : MonoBehaviour
 {
     private Button _buttonStart;
+    private Button _buttonReSet;
     private Button _buttonShop;
     private Button _buttonRank;
     private Button _buttonSound;
@@ -53,6 +54,8 @@ public class MainPanel : MonoBehaviour
     {
         _buttonStart = transform.Find("btn_Start").GetComponent<Button>();
         _buttonStart.onClick.AddListener(OnStartButtonClick);
+        _buttonReSet = transform.Find("Btns/btn_ReSet").GetComponent<Button>();
+        _buttonReSet.onClick.AddListener(OnReSetButtonClick);
         _buttonShop = transform.Find("Btns/btn_Shop").GetComponent<Button>();
         _buttonShop.onClick.AddListener(OnShopButtonClick);
         _buttonRank = transform.Find("Btns/btn_Rank").GetComponent<Button>();
@@ -89,5 +92,13 @@ public class MainPanel : MonoBehaviour
     private void OnSoundButtonClick()
     {
         
+    } 
+    
+    // 重置按钮点击
+    private void OnReSetButtonClick()
+    {
+        
+        EventCenter.Broadcast(EventDefine.ShowReSetPanel);
+
     }
 }
