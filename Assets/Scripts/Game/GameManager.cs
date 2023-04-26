@@ -165,6 +165,19 @@ public class GameManager : MonoBehaviour
     {
         return _selectSkin;
     }
+
+    // 设置音效是否开启
+    public void SetIsMusicOn(bool value)
+    {
+        _isMusicOn = value;
+        Save();
+    }
+    
+    // 获取音效是否开启
+    public bool GetIsMusicOn()
+    {
+        return _isMusicOn ;
+    }
     
     // 初始化游戏数据
     private void InitGameData()

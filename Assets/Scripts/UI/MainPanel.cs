@@ -47,6 +47,7 @@ public class MainPanel : MonoBehaviour
             gameObject.SetActive(false);
         }
 
+        Sound();
         ChangeSkin(GameManager.Instance.GetCurrentSelectSkin());
     }
 
@@ -94,9 +95,25 @@ public class MainPanel : MonoBehaviour
     // 音效按钮点击
     private void OnSoundButtonClick()
     {
-        EventCenter.Broadcast(EventDefine.PlayClickAudio);    
-    } 
-    
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
+        GameManager.Instance.SetIsMusicOn(!GameManager.Instance.GetIsMusicOn());
+        Sound();
+    }
+
+
+    private void Sound()
+    {
+        if (GameManager.Instance.GetIsMusicOn()) // 如果音乐开启
+        {
+            _buttonSound.transform.GetChild(0).GetComponent<Image>().sprite = _vars.musicOn;
+        }
+        else
+        {
+            _buttonSound.transform.GetChild(0).GetComponent<Image>().sprite = _vars.musicOff;
+        }
+        EventCenter.Broadcast(EventDefine.IsMusicOn,GameManager.Instance.GetIsMusicOn());
+
+    }
     // 重置按钮点击
     private void OnReSetButtonClick()
     {

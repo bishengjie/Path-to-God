@@ -28,5 +28,5 @@ public class ManagerVars : ScriptableObject
     public float nextXPos = 0.554f, nextYPos = 0.645f;
     
     public AudioClip jumpClip, fallClip, hitClip, diamondClip, buttonClip;
-    
+    public Sprite musicOn, musicOff;
 }

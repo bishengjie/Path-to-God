@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        EventCenter.AddListener<bool>(EventDefine.IsMusicOn, IsMusicOn);
         EventCenter.AddListener<int>(EventDefine.ChangeSkin,ChangeSkin);
         _vars = ManagerVars.GetManagerVars();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,7 +37,13 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {
         EventCenter.RemoveListener<int>(EventDefine.ChangeSkin,ChangeSkin);
-        
+        EventCenter.RemoveListener<bool>(EventDefine.IsMusicOn, IsMusicOn);
+    }
+    
+    // 音效是否开启
+    private void IsMusicOn(bool value)
+    {
+        _mAudioSouse.mute = !value;
     }
     
     // 更换皮肤的调用

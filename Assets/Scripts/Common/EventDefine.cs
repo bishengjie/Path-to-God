@@ -15,4 +15,5 @@
     ShowReSetPanel,
     ShowRankPanel,
     PlayClickAudio,
+    IsMusicOn,
 }
