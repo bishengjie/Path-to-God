@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine;
@@ -51,23 +52,39 @@ public class PlayerController : MonoBehaviour
     {
         _spriteRenderer.sprite = _vars.characterSkinSpriteList[skinIndex];
     }
+    
+    private int count;
+    private bool IsPointerOverGameObject(Vector2 mousePosition)
+    {
+        //创建一个点击事件
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = mousePosition;
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        //向点击位置发射一条射线，检测是否点击的UI
+        EventSystem.current.RaycastAll(eventData, raycastResults);
+        return raycastResults.Count > 0;
+    }
 
     private void Update()
     {
         Debug.DrawRay(rayDown.position, Vector2.down * 1, Color.red);
         Debug.DrawRay(rayLeft.position, Vector2.left * 0.15f, Color.cyan);
         Debug.DrawRay(rayRight.position, Vector2.right * 0.15f, Color.green);
-        if (Application.platform == RuntimePlatform.Android ||
-            Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            int fingerId = Input.GetTouch(0).fingerId;
-            // 判断是否点击在UI上 是人物不在移动
-            if (EventSystem.current.IsPointerOverGameObject(fingerId)) return;
-        }
-        else
-        {
-            if (EventSystem.current.IsPointerOverGameObject()) return;
-        }
+        
+        // if (Application.platform == RuntimePlatform.Android ||
+        //     Application.platform == RuntimePlatform.IPhonePlayer)
+        // {
+        //     int fingerId = Input.GetTouch(0).fingerId;
+        //     // 判断是否点击在UI上 是人物不在移动
+        //     if (EventSystem.current.IsPointerOverGameObject(fingerId)) return;
+        // }
+        // else
+        // {
+        //     if (EventSystem.current.IsPointerOverGameObject()) return;
+        // }
+        
+        if (IsPointerOverGameObject(Input.mousePosition)) return;
+
         if (GameManager.Instance.IsGameStart == false || GameManager.Instance.IsGameOver
                                                       || GameManager.Instance.IsPause)
             return;
