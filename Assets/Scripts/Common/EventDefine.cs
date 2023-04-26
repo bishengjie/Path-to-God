@@ -13,4 +13,6 @@
     ChangeSkin,
     Hint,
     ShowReSetPanel,
+    ShowRankPanel,
+    
 }

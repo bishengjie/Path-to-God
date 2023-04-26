@@ -85,7 +85,8 @@ public class MainPanel : MonoBehaviour
     /// 排行榜按钮点击
     private void OnRankButtonClick()
     {
-       
+        EventCenter.Broadcast(EventDefine.ShowRankPanel);
+
     }
    
     // 音效按钮点击
