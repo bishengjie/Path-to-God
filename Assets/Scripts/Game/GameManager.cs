@@ -87,6 +87,16 @@ public class GameManager : MonoBehaviour
         return _bestScoreArr.Max();
     }
     
+    // 获得最高分数组
+    public int[] GetScoreArr()
+    {
+        List<int> list = _bestScoreArr.ToList();
+        // 从大到小排序list
+        list.Sort((x, y) => (-x.CompareTo(y)));
+        _bestScoreArr = list.ToArray();
+        return _bestScoreArr;
+    }
+    
     // 玩家移动会调用到此方法
     private void PlayerMove()
     {

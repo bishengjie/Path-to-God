@@ -37,6 +37,12 @@ public class RankPanel : MonoBehaviour
             _close.GetComponent<Image>().color.b, 0.3f), 0.3f);
         _scoreList.transform.DOScale(Vector3.one, 0.3f);
 
+        // 获得最高分数组
+        int[] arr = GameManager.Instance.GetScoreArr();
+        for (int i = 0; i < arr.Length; i++)
+        {
+            score[i].text = arr[i].ToString();
+        }
     }
     
     private void OnCloseButtonClick()

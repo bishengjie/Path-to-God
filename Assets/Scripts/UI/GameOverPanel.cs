@@ -53,7 +53,7 @@ public class GameOverPanel : MonoBehaviour
     // 排行榜按钮点击
     private void OnRankButtonClick()
     {
-        
+        EventCenter.Broadcast(EventDefine.ShowRankPanel);
     }
     // 主界面按钮点击
     private void OnHomeButtonClick()
