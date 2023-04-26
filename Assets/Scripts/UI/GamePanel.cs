@@ -58,6 +58,7 @@ public class GamePanel : MonoBehaviour
     // 暂停按钮点击
     private void OnPauseButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         _buttonPlay.gameObject.SetActive(true);
         _buttonPause.gameObject.SetActive(false);
         // 游戏暂停
@@ -67,6 +68,7 @@ public class GamePanel : MonoBehaviour
     // 开始按钮点击
     private void OnPlayButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         _buttonPlay.gameObject.SetActive(false);
         _buttonPause.gameObject.SetActive(true);
         // 游戏继续

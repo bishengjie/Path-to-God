@@ -14,5 +14,5 @@
     Hint,
     ShowReSetPanel,
     ShowRankPanel,
-    
+    PlayClickAudio,
 }

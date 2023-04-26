@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _myBody;
     private SpriteRenderer _spriteRenderer;
     private bool _isMove;
+    private AudioSource _mAudioSouse;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         _vars = ManagerVars.GetManagerVars();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _myBody = GetComponent<Rigidbody2D>();
+        _mAudioSouse = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
                 _isMove = true;
             }
 
+            _mAudioSouse.PlayOneShot(_vars.jumpClip);
             EventCenter.Broadcast(EventDefine.DecidePath);
             isJump = true;
             Vector3 mousePos = Input.mousePosition;
@@ -82,6 +85,7 @@ public class PlayerController : MonoBehaviour
         // 游戏结束了
         if (_myBody.velocity.y < 0 && IsRayPlatform() == false && GameManager.Instance.IsGameOver == false)
         {
+            _mAudioSouse.PlayOneShot(_vars.fallClip);
             _spriteRenderer.sortingLayerName = "Default";
             GetComponent<BoxCollider2D>().enabled = false;
             GameManager.Instance.IsGameOver = true;
@@ -92,6 +96,7 @@ public class PlayerController : MonoBehaviour
         // 正在跳跃并且检测到障碍物且游戏判定over
         if (isJump && IsRayObstacle() && GameManager.Instance.IsGameOver == false)
         {
+            _mAudioSouse.PlayOneShot(_vars.hitClip);
             GameObject go = ObjectPool.Instance.GetDeathEffect();
             go.SetActive(true);
             go.transform.position = transform.position;
@@ -104,6 +109,7 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.y - Camera.main.transform.position.y < -6 && GameManager.Instance.IsGameOver == false)
         {
+            _mAudioSouse.PlayOneShot(_vars.fallClip);
             GameManager.Instance.IsGameOver = true;
             StartCoroutine(DealyShowGameOverPanel());
         }
@@ -201,6 +207,7 @@ public class PlayerController : MonoBehaviour
     {
         if (col.collider.tag == "Pickup")
         {
+            _mAudioSouse.PlayOneShot(_vars.diamondClip);
             EventCenter.Broadcast(EventDefine.AddDiamond);
             // 吃到钻石
             col.gameObject.SetActive(false);

@@ -47,17 +47,20 @@ public class GameOverPanel : MonoBehaviour
     // 再来一局按钮
     private void OnReStartButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameDate.IsAgainGame = true;
     }
     // 排行榜按钮点击
     private void OnRankButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         EventCenter.Broadcast(EventDefine.ShowRankPanel);
     }
     // 主界面按钮点击
     private void OnHomeButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameDate.IsAgainGame = false;
     }

@@ -68,6 +68,7 @@ public class MainPanel : MonoBehaviour
     // 开始按钮点击后调用此方法
     private void OnStartButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         GameManager.Instance.IsGameStart = true;
                   // 广播，播放
         EventCenter.Broadcast(EventDefine.ShowGamePanel);
@@ -77,6 +78,7 @@ public class MainPanel : MonoBehaviour
     // 商店按钮点击
    private void OnShopButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         EventCenter.Broadcast(EventDefine.ShowShopPanel);
         gameObject.SetActive(false);
         
@@ -85,20 +87,20 @@ public class MainPanel : MonoBehaviour
     /// 排行榜按钮点击
     private void OnRankButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         EventCenter.Broadcast(EventDefine.ShowRankPanel);
-
     }
    
     // 音效按钮点击
     private void OnSoundButtonClick()
     {
-        
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);    
     } 
     
     // 重置按钮点击
     private void OnReSetButtonClick()
     {
-        
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);    
         EventCenter.Broadcast(EventDefine.ShowReSetPanel);
 
     }

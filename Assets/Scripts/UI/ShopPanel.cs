@@ -50,6 +50,7 @@ public class ShopPanel : MonoBehaviour
     // 返回按钮点击
     private void OnBackButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         EventCenter.Broadcast(EventDefine.ShowMainPanel);
         gameObject.SetActive(false);
         
@@ -58,6 +59,7 @@ public class ShopPanel : MonoBehaviour
     // 购买按钮点击
     private void OnBuyButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         int price = int.Parse(_buy.GetComponentInChildren<Text>().text);
         if (price > GameManager.Instance.GetAllDiamond())
         {
@@ -74,6 +76,7 @@ public class ShopPanel : MonoBehaviour
     // 选择按钮点击
     private void OnSelectButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         EventCenter.Broadcast(EventDefine.ChangeSkin, _selectIndex);
         GameManager.Instance.SetSelectSkin(_selectIndex);
         EventCenter.Broadcast(EventDefine.ShowMainPanel);

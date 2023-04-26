@@ -47,6 +47,7 @@ public class RankPanel : MonoBehaviour
     
     private void OnCloseButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         _close.GetComponent<Image>().DOColor(new Color(_close.GetComponent<Image>().
                 color.r, _close.GetComponent<Image>().color.g,
             _close.GetComponent<Image>().color.b, 0), 0.3f);

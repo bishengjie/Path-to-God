@@ -45,12 +45,14 @@ public class ReSetPanel : MonoBehaviour
     // 是按钮点击
     private void OnYesButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         GameManager.Instance.ReSetData();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     // 否按钮点击
     private void OnNoButtonClick()
     {
+        EventCenter.Broadcast(EventDefine.PlayClickAudio);
         _imageBg.DOColor(new Color(_imageBg.color.r, _imageBg.color.g, _imageBg.color.b, 0), 0.3f);
         _dialog.transform.DOScale(Vector3.zero, 0.3f).OnComplete(() =>
         { 
