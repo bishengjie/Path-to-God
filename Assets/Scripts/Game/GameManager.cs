@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -51,6 +53,40 @@ public class GameManager : MonoBehaviour
         EventCenter.RemoveListener(EventDefine.AddDiamond,AddGameDiamond);
     }
 
+    // 保存成绩
+    public void SaveScore(int score)
+    {
+        List<int> list = _bestScoreArr.ToList();
+        // 从大到小排序list
+        list.Sort((x, y) => (-x.CompareTo(y)));
+        _bestScoreArr = list.ToArray();
+
+        // 50 20 10
+        int index = -1;
+        for (int i = 0; i < _bestScoreArr.Length; i++)
+        {
+            if (score > _bestScoreArr[i])
+            {
+                index = i;
+            }
+        }
+        if (index == -1) return;
+
+        for (int i = _bestScoreArr.Length - 1; i > index; i--)
+        {
+            _bestScoreArr[i] = _bestScoreArr[i - 1];
+        }
+        _bestScoreArr[index] = score;
+
+        Save();
+    }
+
+    // 获取最高分
+    public int GetBestScore()
+    {
+        return _bestScoreArr.Max();
+    }
+    
     // 玩家移动会调用到此方法
     private void PlayerMove()
     {
