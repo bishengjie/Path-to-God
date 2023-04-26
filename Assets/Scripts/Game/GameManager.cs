@@ -195,4 +195,18 @@ public class GameManager : MonoBehaviour
             print(e.Message);
         }
     }
+    
+    // 重置数据
+    public void ReSetData()
+    {
+        _isFirstGame = false;
+        _isMusicOn = true;
+        _bestScoreArr = new int[3];
+        _selectSkin = 0;
+        _skinUnlocked = new bool[_vars.skinSpriteList.Count];
+        _skinUnlocked[0] = true;
+        _diamondCount = 10;
+        
+        Save();
+    }
 }
