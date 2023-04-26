@@ -57,9 +57,17 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(rayDown.position, Vector2.down * 1, Color.red);
         Debug.DrawRay(rayLeft.position, Vector2.left * 0.15f, Color.cyan);
         Debug.DrawRay(rayRight.position, Vector2.right * 0.15f, Color.green);
-        // 判断是否点击在UI上 是人物不在移动
-        if (EventSystem.current.IsPointerOverGameObject()) return;
-
+        if (Application.platform == RuntimePlatform.Android ||
+            Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            int fingerId = Input.GetTouch(0).fingerId;
+            // 判断是否点击在UI上 是人物不在移动
+            if (EventSystem.current.IsPointerOverGameObject(fingerId)) return;
+        }
+        else
+        {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+        }
         if (GameManager.Instance.IsGameStart == false || GameManager.Instance.IsGameOver
                                                       || GameManager.Instance.IsPause)
             return;
