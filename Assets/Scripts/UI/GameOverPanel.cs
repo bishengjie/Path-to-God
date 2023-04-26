@@ -6,6 +6,7 @@ public class GameOverPanel : MonoBehaviour
 {
     public Text score, bestScore, addDiamond;
     public Button reStart, rank, home;
+    public Image imageNew;
 
     private void Awake()
     {
@@ -24,8 +25,22 @@ public class GameOverPanel : MonoBehaviour
 
     private void Show()
     {
+        if (GameManager.Instance.GetGameScore()>GameManager.Instance.GetBestScore())
+        {
+            imageNew.gameObject.SetActive(true);
+            bestScore.text = "最高分" + GameManager.Instance.GetGameScore();
+        }
+        else
+        {
+            imageNew.gameObject.SetActive(false);
+            bestScore.text = "最高分" + GameManager.Instance.GetBestScore();
+        }
+
+        GameManager.Instance.SaveScore(GameManager.Instance.GetGameScore());
         score.text = GameManager.Instance.GetGameScore().ToString();
         addDiamond.text = "+" + GameManager.Instance.GetGameDiamond().ToString();
+        // 总的钻石数量
+        GameManager.Instance.UpdateAllDiamond(GameManager.Instance.GetGameDiamond());
         gameObject.SetActive(true);
     }
 
